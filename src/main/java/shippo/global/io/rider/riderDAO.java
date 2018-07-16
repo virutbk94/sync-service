@@ -5,16 +5,16 @@ import com.avaje.ebean.SqlRow;
 import org.json.JSONObject;
 import shippo.global.entities.v0.rider.Rider;
 import shippo.global.entities.v0.rider.Team;
-import shippo.global.entities.v1.UserIntegrationAccount;
+import shippo.global.entities.v0.rider.TookanAgent;
 import shippo.global.PostgressDbConf;
 
 public class riderDAO {
 
     public static String getAgentIdFromRiderId(int riderId) {
-        UserIntegrationAccount userIntegrationAccount =
-                PostgressDbConf.getRiderDb().find(UserIntegrationAccount.class)
+        TookanAgent tookanAgent =
+                PostgressDbConf.getRiderDb().find(TookanAgent.class)
                         .where().idEq(riderId).findUnique();
-        if (userIntegrationAccount != null) return userIntegrationAccount.getAccountId();
+        if (tookanAgent != null) return tookanAgent.getAgentId().toString();
         return "";
     }
 

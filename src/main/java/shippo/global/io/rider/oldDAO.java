@@ -5,6 +5,8 @@ import com.avaje.ebean.SqlRow;
 import shippo.global.PostgressDbConf;
 import shippo.global.type.Type;
 
+import java.util.List;
+
 public class oldDAO {
     public static int getOrderCount(int requestId){
         int orderCount = 0;
@@ -32,6 +34,21 @@ public class oldDAO {
         }
 
         return phone;
+    }
+
+    public static Double getFeeReviceOfOder(int orderId){
+        Double totalValue = 0.0;
+
+        String queryString = "select amount from \"DeliveryOrderFee\" " +
+                "where orderId = " + orderId +
+                " and chargeType = " + Type.ChargeType.REVICE + ";";
+
+        SqlQuery query = PostgressDbConf.getOldDb().createSqlQuery(queryString);
+        List<SqlRow> sqlRowList = query.findList();
+        for (SqlRow sqlRow: sqlRowList) {
+            totalValue += sqlRow.getDouble("amount");
+        }
+        return totalValue;
     }
 
 }

@@ -49,4 +49,11 @@ public class Type {
         public static final String TRANSPORT_TASK = "TransportTask";
     }
 
+    public static class FeeType{
+        public static final String RECEIVER_PAY_FOR_DELIVERY = "Người nhận trả phí";
+    }
+
+    public static class ChargeType{
+        public static final String REVICE = "REVICE";
+    }
 }

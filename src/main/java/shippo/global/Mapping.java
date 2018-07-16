@@ -13,6 +13,7 @@ import shippo.global.io.rider.riderDAO;
 
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -438,6 +439,7 @@ public class Mapping {
     }
 
     public static Task mapTransportationTask2Task(TransportationTask transportationTask) {
+
         Task task = new Task();
         task.setOrder_id(transportationTask.getId().toString());
         task.setJob_description(transportationTask.getDescription() + "\r\n" + transportationTask.getNote());
@@ -504,7 +506,12 @@ public class Mapping {
 
     private static JSONArray buildDeliveryCustomField(TransportationTask transportationTask) {
         JSONArray jsonArray = new JSONArray();
-        // TODO
+
+        String codText = formatMonney(transportationTask.getCod());
+        JSONObject cod_Field = new JSONObject();
+        cod_Field.put("label", Constants.TOOKAN_INTEGRATION_SETTING.get("cod_field"));
+        cod_Field.put("data", codText);
+        jsonArray.put(cod_Field);
 
         Users users = PostgressDbConf.getOldDb().find(Users.class)
                 .where().idEq(transportationTask.getMerchantId()).findUnique();
@@ -518,6 +525,27 @@ public class Mapping {
         customer_name_field.put("label", Constants.TOOKAN_INTEGRATION_SETTING.getString("customer_name_field"));
         customer_name_field.put("data", users.getFullName());
         jsonArray.put(customer_name_field);
+
+        // check thu du mac dinh la co check
+        JSONObject fullCode = new JSONObject();
+        fullCode.put("label", Constants.TOOKAN_INTEGRATION_SETTING.getString("full_cod"));
+        fullCode.put("data", true);
+        jsonArray.put(fullCode);
+
+        // Them phi thu cua nguoi nhan
+        if(Constants.TOOKAN_INTEGRATION_SETTING.isNull("delivery_fee")){
+            JSONObject deliveryFee = new JSONObject();
+            if(transportationTask.getRecipientPayCourierFee().equals(shippo.global.type.Type.FeeType.RECEIVER_PAY_FOR_DELIVERY)){
+                int order_id = transportationTask.getObjectId();
+                Double fee = oldDAO.getFeeReviceOfOder(order_id);
+                deliveryFee.put("label", Constants.TOOKAN_INTEGRATION_SETTING.getString("delivery_fee"));
+                deliveryFee.put("data", formatMonney(fee));
+            }else {
+                deliveryFee.put("label", Constants.TOOKAN_INTEGRATION_SETTING.getString("delivery_fee"));
+                deliveryFee.put("data", "0");
+            }
+            jsonArray.put(deliveryFee);
+        }
 
         return jsonArray;
     }
@@ -550,6 +578,13 @@ public class Mapping {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String formatMonney(Double money){
+        Locale loc = Locale.getDefault();
+        NumberFormat nf = NumberFormat.
+                getCurrencyInstance(loc);
+        return nf.format(money);
     }
 
     public static String timespampToPostgreTimestampString(Timestamp timestamp) {
