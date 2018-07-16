@@ -13,6 +13,7 @@ import shippo.global.io.rider.riderDAO;
 
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -581,10 +582,14 @@ public class Mapping {
     }
 
     public static String formatMonney(Double money){
-        Locale loc = Locale.getDefault();
-        NumberFormat nf = NumberFormat.
-                getCurrencyInstance(loc);
-        return nf.format(money);
+        try {
+            NumberFormat formatter = new DecimalFormat("###,###.##đ");
+            String resp = formatter.format(money);
+            resp = resp.replaceAll(",", ".");
+            return resp;
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static String timespampToPostgreTimestampString(Timestamp timestamp) {
@@ -593,5 +598,9 @@ public class Mapping {
         java.sql.Date date = new java.sql.Date(gmtTimestamp.getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'");
         return sdf.format(date);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(formatMonney(10000.289));
     }
 }
