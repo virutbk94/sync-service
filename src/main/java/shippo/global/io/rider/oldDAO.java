@@ -51,4 +51,17 @@ public class oldDAO {
         return totalValue;
     }
 
+    public static int getMaxId(String tableName) {
+        int orderCount = 0;
+
+        String queryString = "select max(id) as maxId from " + tableName + ";";
+        SqlQuery query = PostgressDbConf.getOldDb().createSqlQuery(queryString);
+        SqlRow sqlRow = query.findUnique();
+        if (sqlRow != null) {
+            return sqlRow.getInteger("maxId");
+        }
+
+        return orderCount;
+    }
+
 }

@@ -3,9 +3,9 @@ package sync.rider_service;
 import jdk.jfr.Description;
 import org.junit.Assert;
 import org.junit.Test;
-import shippo.global.Mapping;
-import shippo.global.entities.v0.rider.RiderShift;
-import shippo.global.entities.v1.TaskBatch;
+import shippo.rider_service.Mapping;
+import shippo.rider_service.entities.v0.RiderShift;
+import shippo.rider_service.entities.v1.TaskBatch;
 
 import java.sql.Timestamp;
 

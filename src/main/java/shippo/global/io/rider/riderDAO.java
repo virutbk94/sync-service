@@ -3,10 +3,10 @@ package shippo.global.io.rider;
 import com.avaje.ebean.SqlQuery;
 import com.avaje.ebean.SqlRow;
 import org.json.JSONObject;
-import shippo.global.entities.v0.rider.Rider;
-import shippo.global.entities.v0.rider.Team;
-import shippo.global.entities.v0.rider.TookanAgent;
 import shippo.global.PostgressDbConf;
+import shippo.rider_service.entities.v0.Rider;
+import shippo.rider_service.entities.v0.TookanAgent;
+import shippo.tookan_service.entities.shippo.Team;
 
 public class riderDAO {
 
