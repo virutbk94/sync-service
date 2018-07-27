@@ -39,7 +39,7 @@ public class RiderSyncActor extends AbstractSyncActor<Rider> {
                     CRUD.delete(user, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete user " + user + " rider " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -50,7 +50,7 @@ public class RiderSyncActor extends AbstractSyncActor<Rider> {
                     CRUD.update(user, server);
                 } catch (Exception e) {
                     LOG.error("Can't update user " + user + " rider " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -61,7 +61,7 @@ public class RiderSyncActor extends AbstractSyncActor<Rider> {
                     CRUD.insert(user, server);
                 } catch (Exception e) {
                     LOG.error("Can't create user " + user + " rider " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

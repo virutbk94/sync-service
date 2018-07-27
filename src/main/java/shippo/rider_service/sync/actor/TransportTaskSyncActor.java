@@ -66,7 +66,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't delete transportationTask " + transportationTask + " TransportTask " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -90,7 +90,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't update transportationTask " + transportationTask + " TransportTask " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -106,7 +106,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't create transportationTask " + transportationTask + " TransportTask " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

@@ -71,7 +71,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't delete taskBatch " + taskBatch + " RiderShift " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -95,7 +95,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't update taskBatch " + taskBatch + " RiderShift " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace().toString());
                     return false;
                 }
                 return true;
@@ -111,7 +111,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't create taskBatch " + taskBatch + " RiderShift " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

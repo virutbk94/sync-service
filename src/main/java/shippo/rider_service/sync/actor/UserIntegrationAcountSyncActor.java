@@ -39,7 +39,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
                     CRUD.delete(tookanAgent, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete tookanAgent " + tookanAgent + " userIntegrationAcount" + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -50,7 +50,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
                     CRUD.update(tookanAgent, server);
                 } catch (Exception e) {
                     LOG.error("Can't update tookanAgent " + tookanAgent + " userIntegrationAcount" + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -61,7 +61,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
                     CRUD.insert(tookanAgent, server);
                 } catch (Exception e) {
                     LOG.error("Can't create tookanAgent " + tookanAgent + " userIntegrationAcount" + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

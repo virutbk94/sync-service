@@ -66,7 +66,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
                     CRUD.update(transportTask, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete timeLine " + timeLine + " TaskHistory " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -88,7 +88,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update timeLine " + timeLine + " TaskHistory " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -104,7 +104,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update create " + timeLine + " TaskHistory " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

@@ -45,7 +45,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't delete teamTookan " + teamTookan + " team " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -60,7 +60,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't update teamTookan " + teamTookan + " team " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -77,7 +77,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't create teamTookan " + teamTookan + " team " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

@@ -51,7 +51,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.delete(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete riderShift " + riderShift + " TaskBatch " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -62,7 +62,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.update(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't update riderShift " + riderShift + " TaskBatch " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -73,7 +73,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.insert(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't create riderShift " + riderShift + " TaskBatch " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;

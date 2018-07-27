@@ -66,7 +66,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                     CRUD.update(task, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete metadata " + metadata + " Metafields " + before + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -95,7 +95,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update metadata " + metadata + " Metafields " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
@@ -121,7 +121,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update create " + metadata + " Metafields " + after + "\n" +
-                            e.toString());
+                            e.getStackTrace());
                     return false;
                 }
                 return true;
