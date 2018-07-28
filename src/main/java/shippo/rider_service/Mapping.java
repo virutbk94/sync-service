@@ -471,7 +471,7 @@ public class Mapping {
         for(Metadata object : metadataList){
             MetaFields metaField = new MetaFields();
             metaField.setObjectId(taskId);
-            metaField.setObjectType(shippo.global.type.Type.MetaFieldObjectType.TASK_BATCH);
+            metaField.setObjectType(shippo.global.type.Type.MetaFieldObjectType.TRANSPORT_TASK);
             metaField.setVersion(version);
             metaField.setLabel(object.getLabel());
             metaField.setKey(object.getKey());

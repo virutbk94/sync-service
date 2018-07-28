@@ -80,9 +80,11 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                     if (after.getObjectType().equals(Constants.ObjectType.TASK_BATCH)) {
                         task = CRUD.read("id", after.getObjectId(), RiderShift.class, server);
                         metadataList = ((RiderShift) task).getMetadata();
+                        ((RiderShift) task).setVersion(after.getVersion());
                     } else if (after.getObjectType().equals(Constants.ObjectType.TRANSPORT_TASK)) {
                         task = CRUD.read("id", after.getObjectId(), TransportationTask.class, server);
                         metadataList = ((TransportationTask) task).getMetadata();
+                        ((TransportationTask) task).setVersion(after.getVersion());
                     } else {
                         LOG.info("Meta data is other Object Type " + after);
                         return true;
