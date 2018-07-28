@@ -56,4 +56,14 @@ public class Metadata {
     public int hashCode() {
         return Objects.hash(getKey(), getLabel(), getValue(), getTime());
     }
+
+    @Override
+    public String toString() {
+        return "Metadata{" +
+                "key='" + key + '\'' +
+                ", label='" + label + '\'' +
+                ", value='" + value + '\'' +
+                ", time='" + time + '\'' +
+                '}';
+    }
 }
