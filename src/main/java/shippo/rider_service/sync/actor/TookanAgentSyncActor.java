@@ -4,6 +4,7 @@ import akka.actor.Props;
 import com.avaje.ebean.EbeanServer;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.entities.v0.TookanAgent;
@@ -12,7 +13,7 @@ import shippo.global.sync_actor.AbstractSyncActor;
 
 public class TookanAgentSyncActor extends AbstractSyncActor<TookanAgent> {
 
-    public TookanAgentSyncActor() {
+    private TookanAgentSyncActor() {
         LOG = LoggerFactory.getLogger(TookanAgentSyncActor.class);
         sourceVersion = 0;
         destinationVersion = 1;
@@ -39,7 +40,7 @@ public class TookanAgentSyncActor extends AbstractSyncActor<TookanAgent> {
                     CRUD.delete(userIntegrationAccount, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete userIntegrationAccount " + userIntegrationAccount + " tookanAgent " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -50,7 +51,7 @@ public class TookanAgentSyncActor extends AbstractSyncActor<TookanAgent> {
                     CRUD.update(userIntegrationAccount, server);
                 } catch (Exception e) {
                     LOG.error("Can't update userIntegrationAccount " + userIntegrationAccount + " tookanAgent " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -61,7 +62,7 @@ public class TookanAgentSyncActor extends AbstractSyncActor<TookanAgent> {
                     CRUD.insert(userIntegrationAccount, server);
                 } catch (Exception e) {
                     LOG.error("Can't create userIntegrationAccount " + userIntegrationAccount + " tookanAgent " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

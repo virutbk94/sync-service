@@ -5,6 +5,7 @@ import org.eclipse.jetty.client.api.ContentResponse;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.tookan_api.TeamApi;
@@ -14,7 +15,7 @@ import shippo.tookan_service.entities.tookan.TeamTookan;
 
 public class TeamSyncActor extends AbstractSyncActor<Team> {
 
-    public TeamSyncActor() {
+    private TeamSyncActor() {
         LOG = LoggerFactory.getLogger(TeamSyncActor.class);
         sourceVersion = 0;
         destinationVersion = 1;
@@ -22,7 +23,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
     }
 
     public static Props props() {
-        return Props.create(TeamSyncActor.class,() -> new TeamSyncActor());
+        return Props.create(TeamSyncActor.class,TeamSyncActor::new);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't delete teamTookan " + teamTookan + " team " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -60,7 +61,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't update teamTookan " + teamTookan + " team " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -77,7 +78,7 @@ public class TeamSyncActor extends AbstractSyncActor<Team> {
                     }else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't create teamTookan " + teamTookan + " team " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

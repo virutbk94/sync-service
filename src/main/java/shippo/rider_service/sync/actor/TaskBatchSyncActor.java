@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.entities.v0.RiderShift;
@@ -14,7 +15,7 @@ import shippo.global.sync_actor.AbstractSyncActor;
 
 public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
 
-    public TaskBatchSyncActor() {
+    private TaskBatchSyncActor() {
         LOG = LoggerFactory.getLogger(TaskBatchSyncActor.class);
         sourceVersion = 1;
         destinationVersion = 0;
@@ -22,7 +23,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
     }
 
     public static Props props() {
-        return Props.create(TaskBatchSyncActor.class,() -> new TaskBatchSyncActor());
+        return Props.create(TaskBatchSyncActor.class,TaskBatchSyncActor::new);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.delete(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete riderShift " + riderShift + " TaskBatch " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -62,7 +63,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.update(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't update riderShift " + riderShift + " TaskBatch " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -73,7 +74,7 @@ public class TaskBatchSyncActor extends AbstractSyncActor<TaskBatch> {
                     CRUD.insert(riderShift, server);
                 } catch (Exception e) {
                     LOG.error("Can't create riderShift " + riderShift + " TaskBatch " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

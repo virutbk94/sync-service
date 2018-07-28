@@ -4,6 +4,7 @@ import akka.actor.Props;
 import com.avaje.ebean.EbeanServer;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.entities.v0.Rider;
@@ -12,7 +13,7 @@ import shippo.global.sync_actor.AbstractSyncActor;
 
 public class UsersSyncActor extends AbstractSyncActor<Users> {
 
-    public UsersSyncActor() {
+    private UsersSyncActor() {
         LOG = LoggerFactory.getLogger(UsersSyncActor.class);
         sourceVersion = 1;
         destinationVersion = 0;
@@ -20,7 +21,7 @@ public class UsersSyncActor extends AbstractSyncActor<Users> {
     }
 
     public static Props props() {
-        return Props.create(UsersSyncActor.class,() -> new UsersSyncActor());
+        return Props.create(UsersSyncActor.class,UsersSyncActor::new);
     }
 
     @Override
@@ -40,7 +41,7 @@ public class UsersSyncActor extends AbstractSyncActor<Users> {
                     CRUD.delete(rider, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete rider " + rider + " user " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -52,7 +53,7 @@ public class UsersSyncActor extends AbstractSyncActor<Users> {
                     CRUD.update(rider, server);
                 } catch (Exception e) {
                     LOG.error("Can't update rider " + rider + " user " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -64,7 +65,7 @@ public class UsersSyncActor extends AbstractSyncActor<Users> {
                     CRUD.insert(rider, server);
                 } catch (Exception e) {
                     LOG.error("Can't create rider " + rider + " user " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class TransportationTaskSyncActor extends AbstractSyncActor<TransportationTask> {
 
-    public TransportationTaskSyncActor() {
+    private TransportationTaskSyncActor() {
         LOG = LoggerFactory.getLogger(TransportationTaskSyncActor.class);
         sourceVersion = 0;
         destinationVersion = 1;
@@ -34,7 +34,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
     }
 
     public static Props props() {
-        return Props.create(TransportationTaskSyncActor.class,() -> new TransportationTaskSyncActor());
+        return Props.create(TransportationTaskSyncActor.class,TransportationTaskSyncActor::new);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
                         }
                 } catch (Exception e) {
                     LOG.error("Can't delete transportTask " + transportTask + " TransportationTask " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -102,7 +102,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
                         }
                 } catch (Exception e) {
                     LOG.error("Can't update transportTask " + transportTask + " TransportationTask " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -136,7 +136,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
                     } else LOG.warn(jsonObject.toString());
                 } catch (Exception e) {
                     LOG.error("Can't create transportTask " + transportTask + " TransportationTask " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

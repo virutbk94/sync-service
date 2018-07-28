@@ -4,6 +4,7 @@ import akka.actor.Props;
 import com.avaje.ebean.EbeanServer;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.conf.Constants;
@@ -19,7 +20,7 @@ import java.util.Objects;
 
 public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
 
-    public MetaFieldsSyncActor() {
+    private MetaFieldsSyncActor() {
         LOG = LoggerFactory.getLogger(MetaFieldsSyncActor.class);
         sourceVersion = 1;
         destinationVersion = 0;
@@ -27,7 +28,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
     }
 
     public static Props props() {
-        return Props.create(MetaFieldsSyncActor.class,() -> new MetaFieldsSyncActor());
+        return Props.create(MetaFieldsSyncActor.class,MetaFieldsSyncActor::new);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                     CRUD.update(task, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete metadata " + metadata + " Metafields " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -95,7 +96,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update metadata " + metadata + " Metafields " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -121,7 +122,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update create " + metadata + " Metafields " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

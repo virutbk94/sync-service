@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.entities.v0.TaskHistory;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
 
-    public TransportTaskSyncActor() {
+    private TransportTaskSyncActor() {
         LOG = LoggerFactory.getLogger(TransportTaskSyncActor.class);
         sourceVersion = 1;
         destinationVersion = 0;
@@ -27,7 +28,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
     }
 
     public static Props props() {
-        return Props.create(TransportTaskSyncActor.class,() -> new TransportTaskSyncActor());
+        return Props.create(TransportTaskSyncActor.class,TransportTaskSyncActor::new);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't delete transportationTask " + transportationTask + " TransportTask " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -90,7 +91,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't update transportationTask " + transportationTask + " TransportTask " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -106,7 +107,7 @@ public class TransportTaskSyncActor extends AbstractSyncActor<TransportTask> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't create transportationTask " + transportationTask + " TransportTask " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

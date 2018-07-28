@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.global.sync_actor.AbstractSyncActor;
 import shippo.rider_service.Mapping;
@@ -19,7 +20,7 @@ import java.util.Map;
 
 public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
 
-    public RiderShiftSyncActor() {
+    private RiderShiftSyncActor() {
         LOG = LoggerFactory.getLogger(RiderShiftSyncActor.class);
         sourceVersion = 0;
         destinationVersion = 1;
@@ -27,7 +28,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
     }
 
     public static Props props() {
-        return Props.create(RiderShiftSyncActor.class,RiderShiftSyncActor::new);
+        return Props.create(RiderShiftSyncActor.class, RiderShiftSyncActor::new);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't delete taskBatch " + taskBatch + " RiderShift " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -95,7 +96,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't update taskBatch " + taskBatch + " RiderShift " + after + "\n" +
-                            e.getStackTrace().toString());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -111,7 +112,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                         }
                 } catch (Exception e) {
                     LOG.error("Can't create taskBatch " + taskBatch + " RiderShift " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

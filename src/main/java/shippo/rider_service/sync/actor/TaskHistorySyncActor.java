@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import shippo.global.PostgressDbConf;
+import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.rider_service.Mapping;
 import shippo.rider_service.entities.v0.TaskHistory;
@@ -19,7 +20,7 @@ import java.util.Objects;
 
 public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
 
-    public TaskHistorySyncActor() {
+    private TaskHistorySyncActor() {
         LOG = LoggerFactory.getLogger(TaskHistorySyncActor.class);
         sourceVersion = 0;
         destinationVersion = 1;
@@ -27,7 +28,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
     }
 
     public static Props props() {
-        return Props.create(TaskHistorySyncActor.class,() -> new TaskHistorySyncActor());
+        return Props.create(TaskHistorySyncActor.class,TaskHistorySyncActor::new);
     }
 
     @Override
@@ -66,7 +67,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
                     CRUD.update(transportTask, server);
                 } catch (Exception e) {
                     LOG.error("Can't delete timeLine " + timeLine + " TaskHistory " + before + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -88,7 +89,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update timeLine " + timeLine + " TaskHistory " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
@@ -104,7 +105,7 @@ public class TaskHistorySyncActor extends AbstractSyncActor<TaskHistory> {
 
                 } catch (Exception e) {
                     LOG.error("Can't update create " + timeLine + " TaskHistory " + after + "\n" +
-                            e.getStackTrace());
+                            Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;

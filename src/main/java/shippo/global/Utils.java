@@ -3,6 +3,8 @@ package shippo.global;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -68,6 +70,12 @@ public class Utils {
         java.sql.Date date = new java.sql.Date(gmtTimestamp.getTime());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'");
         return sdf.format(date);
+    }
+
+    public static String getExceptionMessage(Exception e){
+        StringWriter writer = new StringWriter();
+        e.printStackTrace(new PrintWriter(writer));
+        return writer.toString();
     }
 
     public static void main(String[] args) {
