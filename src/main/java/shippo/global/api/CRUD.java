@@ -51,6 +51,7 @@ public class CRUD {
     }
 
     public static Object read(Map<String, Object> map, Class beanType, EbeanServer server) throws Exception {
+
         return server.find(beanType).where(Expr.allEq(map)).findUnique();
     }
 }
