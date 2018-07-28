@@ -90,8 +90,12 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                         return true;
                     }
                     for (Metadata metadata1 : metadataList) {
-                        if (Objects.equals(metadata1.getLabel(), metadata.getLabel())) {
-                            metadata1 = metadata;
+                        if (Objects.equals(metadata1.getLabel(), metadata.getLabel())
+                                && Objects.equals(metadata1.getKey(), metadata.getKey())) {
+                            metadata1.setKey(metadata.getKey());
+                            metadata1.setLabel(metadata.getLabel());
+                            metadata1.setTime(metadata.getTime());
+                            metadata1.setValue(metadata.getValue());
                             break;
                         }
                     }
