@@ -445,6 +445,7 @@ public class Mapping {
         int taskId = recordAfter.getId();
         int version = recordAfter.getVersion();
         List<Metadata> metadataList = recordAfter.getMetadata();
+        if(metadataList == null) return metaFields;
         for(Metadata object : metadataList){
             MetaFields metaField = new MetaFields();
             metaField.setObjectId(taskId);
