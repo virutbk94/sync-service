@@ -211,6 +211,19 @@ public class Users implements Serializable {
     public String toString() {
         return "Users{" +
                 "id=" + id +
+                ", realm='" + realm + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", state='" + state + '\'' +
+                ", tagline='" + tagline + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", registeredDate=" + registeredDate +
+                ", mobile='" + mobile + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", version=" + version +
+                ", modifiedTime=" + modifiedTime +
                 '}';
     }
 

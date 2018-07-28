@@ -70,7 +70,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
                     if (metaFieldsList != null)
                         for (MetaFields metaFields : metaFieldsList) {
                             Map<String, Object> map = new HashMap<>();
-                            map.put("\"objectId\"", metaFields.getObjectId());
+                            map.put("objectId", metaFields.getObjectId());
                             map.put("key", metaFields.getKey());
                             map.put("label", metaFields.getLabel());
                             MetaFields metaFieldsToDelete = (MetaFields) CRUD.read(map, MetaFields.class, server);
@@ -91,7 +91,7 @@ public class TransportationTaskSyncActor extends AbstractSyncActor<Transportatio
                     if (metaFieldsList != null)
                         for (MetaFields metaFields : metaFieldsList) {
                             Map<String, Object> map = new HashMap<>();
-                            map.put("\"objectId\"", metaFields.getObjectId());
+                            map.put("objectId", metaFields.getObjectId());
                             map.put("key", metaFields.getKey());
                             map.put("label", metaFields.getLabel());
                             MetaFields metaFieldsToDelete = (MetaFields) CRUD.read(map, MetaFields.class, server);

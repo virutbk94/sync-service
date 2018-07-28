@@ -91,4 +91,17 @@ public class BatchData {
 
         return Objects.hash(getObjectType(), getObjectId(), getObjectCode(), getAssignedTo(), getType(), getStatus(), getErrors());
     }
+
+    @Override
+    public String toString() {
+        return "BatchData{" +
+                "objectType='" + objectType + '\'' +
+                ", objectId=" + objectId +
+                ", objectCode='" + objectCode + '\'' +
+                ", assignedTo=" + assignedTo +
+                ", type='" + type + '\'' +
+                ", status='" + status + '\'' +
+                ", errors=" + errors +
+                '}';
+    }
 }

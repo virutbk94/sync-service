@@ -10,9 +10,7 @@ import shippo.tookan_service.entities.tookan.Task;
 
 public class TaskApi extends TookanApi {
     public ContentResponse insert(Task task) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        String taskString = mapper.writeValueAsString(task);
-        JSONObject taskJson = new JSONObject(taskString);
+        JSONObject taskJson = new JSONObject(task);
         return super.post(Constants.TOOKAN_TASK_ADD_URL, taskJson);
     }
 }

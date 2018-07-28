@@ -118,4 +118,18 @@ public class MetaFields implements Serializable {
     public int hashCode() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "MetaFields{" +
+                "id=" + id +
+                ", objectType='" + objectType + '\'' +
+                ", objectId=" + objectId +
+                ", key='" + key + '\'' +
+                ", label='" + label + '\'' +
+                ", value='" + value + '\'' +
+                ", version=" + version +
+                ", modifiedTime=" + modifiedTime +
+                '}';
+    }
 }

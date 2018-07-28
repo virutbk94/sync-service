@@ -60,4 +60,14 @@ public class TimeLine {
     public int hashCode() {
         return Objects.hash(getScope(), getLabel(), getTime(), getColor());
     }
+
+    @Override
+    public String toString() {
+        return "TimeLine{" +
+                "scope='" + scope + '\'' +
+                ", label='" + label + '\'' +
+                ", time='" + time + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

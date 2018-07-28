@@ -129,7 +129,14 @@ public class UserIntegrationAccount implements Serializable {
 
     @Override
     public String toString() {
-        return "shippo.sync.entities.v0.UserIntegrationAccount[ id=" + id + " ]";
+        return "UserIntegrationAccount{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", integrationId=" + integrationId +
+                ", account='" + account + '\'' +
+                ", accountId='" + accountId + '\'' +
+                ", version=" + version +
+                ", modifiedTime=" + modifiedTime +
+                '}';
     }
-    
 }

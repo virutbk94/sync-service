@@ -2,6 +2,7 @@ package shippo.global.api;
 
 import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.Expr;
+import com.avaje.ebean.Expression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +20,6 @@ public class CRUD {
 
     public static void save(Object object, String key, Object value, Class beanType, EbeanServer server) throws Exception {
         Object object1 = server.find(beanType).where().eq(key, value).findUnique();
-        if (object1 == null) server.insert(object);
-        else server.update(object);
-        LOG.info("save {} done!", object);
-    }
-
-    public static void save(Object object, Map<String, Object> map, Class beanType, EbeanServer server) throws Exception {
-        Object object1 = server.find(beanType).where(Expr.allEq(map)).findUnique();
         if (object1 == null) server.insert(object);
         else server.update(object);
         LOG.info("save {} done!", object);
@@ -51,7 +45,7 @@ public class CRUD {
     }
 
     public static Object read(Map<String, Object> map, Class beanType, EbeanServer server) throws Exception {
-
-        return server.find(beanType).where(Expr.allEq(map)).findUnique();
+        Expression expression = server.getExpressionFactory().allEq(map);
+        return server.find(beanType).where(expression).findUnique();
     }
 }

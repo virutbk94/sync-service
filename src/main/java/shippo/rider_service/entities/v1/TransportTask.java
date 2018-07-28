@@ -563,6 +563,49 @@ public class TransportTask implements Serializable {
     public String toString() {
         return "TransportTask{" +
                 "id=" + id +
+                ", createdTime=" + createdTime +
+                ", createdBy=" + createdBy +
+                ", modifiedTime=" + modifiedTime +
+                ", customerId=" + customerId +
+                ", pickupDetail='" + pickupDetail + '\'' +
+                ", pickupDistrictId=" + pickupDistrictId +
+                ", pickupProvinceId=" + pickupProvinceId +
+                ", pickupContactName='" + pickupContactName + '\'' +
+                ", pickupContactPhone='" + pickupContactPhone + '\'' +
+                ", requestId=" + requestId +
+                ", deliverDetail='" + deliverDetail + '\'' +
+                ", deliverDistrictId=" + deliverDistrictId +
+                ", deliverProvinceId=" + deliverProvinceId +
+                ", deliverContactName='" + deliverContactName + '\'' +
+                ", deliverContactPhone='" + deliverContactPhone + '\'' +
+                ", description='" + description + '\'' +
+                ", assignedTo=" + assignedTo +
+                ", status='" + status + '\'' +
+                ", note='" + note + '\'' +
+                ", type='" + type + '\'' +
+                ", pickupAddressFull='" + pickupAddressFull + '\'' +
+                ", deliverAddressFull='" + deliverAddressFull + '\'' +
+                ", reason='" + reason + '\'' +
+                ", reasonCode='" + reasonCode + '\'' +
+                ", jobId='" + jobId + '\'' +
+                ", objectType='" + objectType + '\'' +
+                ", objectId=" + objectId +
+                ", realCod=" + realCod +
+                ", startedTime=" + startedTime +
+                ", failedTime=" + failedTime +
+                ", successTime=" + successTime +
+                ", cod=" + cod +
+                ", objectCode='" + objectCode + '\'' +
+                ", timeline=" + timeline +
+                ", pickupBefore=" + pickupBefore +
+                ", deliverBefore=" + deliverBefore +
+                ", taskDeadline=" + taskDeadline +
+                ", batchId=" + batchId +
+                ", assigneeType='" + assigneeType + '\'' +
+                ", taskType='" + taskType + '\'' +
+                ", internalReasonFail='" + internalReasonFail + '\'' +
+                ", feeType='" + feeType + '\'' +
+                ", version=" + version +
                 '}';
     }
 
