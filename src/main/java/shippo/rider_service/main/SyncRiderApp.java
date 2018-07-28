@@ -5,9 +5,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import shippo.global.ConfigLoader;
-import shippo.global.KafkaRef;
+import shippo.rider_service.kafka.KafkaRef;
 import shippo.global.kafka.SingleConsumer;
-import shippo.global.sync_actor.ActorManager;
+import shippo.rider_service.sync.actor.ActorManager;
 
 import java.util.ArrayList;
 import java.util.List;

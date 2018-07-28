@@ -1,4 +1,7 @@
-package shippo.global;
+package shippo.rider_service.kafka;
+
+import shippo.global.ConfigLoader;
+import shippo.global.Constants;
 
 import java.util.HashMap;
 import java.util.Map;

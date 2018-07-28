@@ -381,6 +381,8 @@ public class Mapping {
 
     public static TookanAgent mapUserInterg2Tookan(UserIntegrationAccount userIntegrationAccount) {
         TookanAgent tookanAgent = new TookanAgent();
+        // If not tookan
+        if(!userIntegrationAccount.getIntegrationId().equals(1)) return null;
         // mapping here
         tookanAgent.setId(userIntegrationAccount.getId());
         tookanAgent.setAgent(userIntegrationAccount.getAccount());

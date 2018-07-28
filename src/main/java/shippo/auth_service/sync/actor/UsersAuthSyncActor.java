@@ -1,27 +1,27 @@
-package shippo.rider_service.sync.actor;
+package shippo.auth_service.sync.actor;
 
 import akka.actor.Props;
 import com.avaje.ebean.EbeanServer;
 import org.slf4j.LoggerFactory;
+import shippo.auth_service.Mapping;
+import shippo.auth_service.entities.v0.UsersAuth;
+import shippo.auth_service.entities.v1.Users;
 import shippo.global.PostgressDbConf;
 import shippo.global.Utils;
 import shippo.global.api.CRUD;
 import shippo.global.sync_actor.AbstractSyncActor;
-import shippo.rider_service.Mapping;
-import shippo.rider_service.entities.v0.Rider;
-import shippo.rider_service.entities.v1.Users;
 
-public class RiderSyncActor extends AbstractSyncActor<Rider> {
+public class UsersAuthSyncActor extends AbstractSyncActor<UsersAuth> {
 
-    private RiderSyncActor() {
-        LOG = LoggerFactory.getLogger(RiderSyncActor.class);
-        sourceVersion = 0;
-        destinationVersion = 1;
-        typeClass = Rider.class;
+    private UsersAuthSyncActor() {
+        LOG = LoggerFactory.getLogger(UsersAuthSyncActor.class);
+        sourceVersion = 1;
+        destinationVersion = 0;
+        typeClass = UsersAuth.class;
     }
 
     public static Props props() {
-        return Props.create(RiderSyncActor.class,RiderSyncActor::new);
+        return Props.create(UsersAuthSyncActor.class, UsersAuthSyncActor::new);
     }
 
     @Override
@@ -31,38 +31,37 @@ public class RiderSyncActor extends AbstractSyncActor<Rider> {
 
     @Override
     protected boolean executeSync() {
-        Users user;
-        EbeanServer server = PostgressDbConf.getOldDb();
+        Users users;
+        EbeanServer server = PostgressDbConf.getRiderDb();
         switch (crudOperation) {
             case 'd': {
-                user = Mapping.mapRiderToUsers(before);
+                users = Mapping.mapUsersAuthToUsers(before);
                 try {
-                    CRUD.delete(user, server);
+                    CRUD.delete(users, server);
                 } catch (Exception e) {
-                    LOG.error("Can't delete user " + user + " rider " + before + "\n" +
+                    LOG.error("Can't delete users " + users + " usersAuth " + before + "\n" +
                             Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
             }
             case 'u': {
-                user = Mapping.mapRiderToUsers(after);
+                users = Mapping.mapUsersAuthToUsers(after);
                 try {
-                    CRUD.save(user,Users.class, server);
+                    CRUD.update(users, server);
                 } catch (Exception e) {
-                    LOG.error("Can't update user " + user + " rider " + after + "\n" +
+                    LOG.error("Can't update users " + users + " usersAuth " + after + "\n" +
                             Utils.getExceptionMessage(e));
                     return false;
                 }
                 return true;
             }
             case 'c': {
-                if(after.getUserId() == null) return true;
-                user = Mapping.mapRiderToUsers(after);
+                users = Mapping.mapUsersAuthToUsers(after);
                 try {
-                    CRUD.save(user,Users.class, server);
+                    CRUD.insert(users, server);
                 } catch (Exception e) {
-                    LOG.error("Can't create user " + user + " rider " + after + "\n" +
+                    LOG.error("Can't create users " + users + " usersAuth " + after + "\n" +
                             Utils.getExceptionMessage(e));
                     return false;
                 }
@@ -72,5 +71,4 @@ public class RiderSyncActor extends AbstractSyncActor<Rider> {
                 return false;
         }
     }
-
 }

@@ -190,4 +190,5 @@ public class Users extends Model implements Serializable {
                 "id=" + id +
                 '}';
     }
+
 }

@@ -54,7 +54,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                         metadataList = ((TransportationTask) task).getMetadata();
                     } else {
                         LOG.info("Meta data is other Object Type " + before);
-                        return false;
+                        return true;
                     }
                     int index = 0;
                     for (Metadata metadata1 : metadataList) {
@@ -85,7 +85,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                         metadataList = ((TransportationTask) task).getMetadata();
                     } else {
                         LOG.info("Meta data is other Object Type " + after);
-                        return false;
+                        return true;
                     }
                     for (Metadata metadata1 : metadataList) {
                         if (Objects.equals(metadata1.getLabel(), metadata.getLabel())) {
@@ -114,7 +114,7 @@ public class MetaFieldsSyncActor extends AbstractSyncActor<MetaFields> {
                         metadataList = ((TransportationTask) task).getMetadata();
                     } else {
                         LOG.info("Meta data is other Object Type " + after);
-                        return false;
+                        return true;
                     }
                     if (metadataList == null) metadataList = new ArrayList<>();
                     metadataList.add(metadata);

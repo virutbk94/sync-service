@@ -173,20 +173,44 @@ public class UsersAuth extends Model implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UsersAuth)) return false;
-        UsersAuth users = (UsersAuth) o;
-        return Objects.equals(getId(), users.getId());
+        UsersAuth usersAuth = (UsersAuth) o;
+        return Objects.equals(getId(), usersAuth.getId()) &&
+                Objects.equals(getUsername(), usersAuth.getUsername()) &&
+                Objects.equals(getEmail(), usersAuth.getEmail()) &&
+                Objects.equals(getSection(), usersAuth.getSection()) &&
+                Objects.equals(getState(), usersAuth.getState()) &&
+                Objects.equals(isEmailVerified, usersAuth.isEmailVerified) &&
+                Objects.equals(isRequiredChangePass, usersAuth.isRequiredChangePass) &&
+                Objects.equals(getPassword(), usersAuth.getPassword()) &&
+                Objects.equals(getChangePassAt(), usersAuth.getChangePassAt()) &&
+                Objects.equals(getCreatedAt(), usersAuth.getCreatedAt()) &&
+                Objects.equals(getUpdatedAt(), usersAuth.getUpdatedAt()) &&
+                Objects.equals(getVersion(), usersAuth.getVersion()) &&
+                Objects.equals(getLevel(), usersAuth.getLevel());
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(getId());
+        return id;
     }
 
     @Override
     public String toString() {
         return "UsersAuth{" +
                 "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", section='" + section + '\'' +
+                ", state='" + state + '\'' +
+                ", isEmailVerified=" + isEmailVerified +
+                ", isRequiredChangePass=" + isRequiredChangePass +
+                ", password='" + password + '\'' +
+                ", changePassAt=" + changePassAt +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", version=" + version +
+                ", level='" + level + '\'' +
                 '}';
     }
+
 }

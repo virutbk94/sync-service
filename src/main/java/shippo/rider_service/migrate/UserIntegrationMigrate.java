@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserIntegrationMigrate extends Thread{
+public class UserIntegrationMigrate extends Thread {
     private Logger LOG = LoggerFactory.getLogger(UserIntegrationMigrate.class);
 
     public void run() {
@@ -46,8 +46,9 @@ public class UserIntegrationMigrate extends Thread{
 
         for (UserIntegrationAccount userIntegrationAccount : userIntegrationAccountList) {
             if (userIntegrationAccount.getVersion() % 2 == 0) continue;
-            TookanAgent riderShift = Mapping.mapUserInterg2Tookan(userIntegrationAccount);
-            tookanAgentList.add(riderShift);
+            TookanAgent tookanAgent = Mapping.mapUserInterg2Tookan(userIntegrationAccount);
+            if (tookanAgent != null)
+                tookanAgentList.add(tookanAgent);
         }
 
         Transaction transaction = newDb.beginTransaction();

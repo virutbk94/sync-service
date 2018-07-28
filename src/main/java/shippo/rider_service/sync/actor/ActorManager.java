@@ -1,11 +1,10 @@
-package shippo.global.sync_actor;
+package shippo.rider_service.sync.actor;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import shippo.global.Constants;
-import shippo.rider_service.sync.actor.*;
 
 import java.util.HashMap;
 import java.util.Map;

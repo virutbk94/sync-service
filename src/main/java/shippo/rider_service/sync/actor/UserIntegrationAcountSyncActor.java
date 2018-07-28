@@ -35,6 +35,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
         EbeanServer server = PostgressDbConf.getRiderDb();
         switch (crudOperation) {
             case 'd': {
+                if(!before.getIntegrationId().equals(1)) return true;
                 tookanAgent = Mapping.mapUserInterg2Tookan(before);
                 try {
                     CRUD.delete(tookanAgent, server);
@@ -46,6 +47,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
                 return true;
             }
             case 'u': {
+                if(!after.getIntegrationId().equals(1)) return true;
                 tookanAgent = Mapping.mapUserInterg2Tookan(after);
                 try {
                     CRUD.update(tookanAgent, server);
@@ -57,6 +59,7 @@ public class UserIntegrationAcountSyncActor extends AbstractSyncActor<UserIntegr
                 return true;
             }
             case 'c': {
+                if(!after.getIntegrationId().equals(1)) return true;
                 tookanAgent = Mapping.mapUserInterg2Tookan(after);
                 try {
                     CRUD.insert(tookanAgent, server);
