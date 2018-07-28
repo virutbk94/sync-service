@@ -105,7 +105,7 @@ public class RiderShiftSyncActor extends AbstractSyncActor<RiderShift> {
                 taskBatch = Mapping.mapRiderShift2TaskBatch(after);
                 try {
                     CRUD.insert(taskBatch, server);
-                    List<MetaFields> metaFieldsList = Mapping.mapTask2MetaFields(before);
+                    List<MetaFields> metaFieldsList = Mapping.mapTask2MetaFields(after);
                     if (metaFieldsList != null)
                         for (MetaFields metaFields : metaFieldsList) {
                             CRUD.insert(metaFields, server);
